@@ -9,22 +9,21 @@
     <link rel="canonical" href="https://www.drewversedesign.online/" />
     
     <script>
-        // Use bracket notation to prevent build tools/injectors from breaking the syntax
-        // if they try to replace process.env.API_KEY with an empty value.
+        // Ensure process.env exists and won't throw errors
         window['process'] = { 'env': { 'API_KEY': '' } };
     </script>
 
     <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@19.0.0",
-    "react/": "https://esm.sh/react@19.0.0/",
-    "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
-  }
-}
-</script>
+    {
+      "imports": {
+        "react": "https://esm.sh/react@19.0.0",
+        "react/": "https://esm.sh/react@19.0.0/",
+        "react-dom": "https://esm.sh/react-dom@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+        "react-dom/": "https://esm.sh/react-dom@19.0.0/"
+      }
+    }
+    </script>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
