@@ -9,8 +9,9 @@
     <link rel="canonical" href="https://www.drewversedesign.online/" />
     
     <script>
-        // Initialize process shim immediately at the top of head
-        window.process = { env: { API_KEY: '' } };
+        // Use bracket notation to prevent build tools/injectors from breaking the syntax
+        // if they try to replace process.env.API_KEY with an empty value.
+        window['process'] = { 'env': { 'API_KEY': '' } };
     </script>
 
     <script type="importmap">
@@ -73,16 +74,26 @@
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
-        #root:empty {
-            display: flex;
-            align-items: center;
-            justify-center: center;
-            height: 100vh;
-            background: #0A0A0A;
+        #root:empty::after {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #F97316;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -20px 0 0 -20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-300">
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen relative">
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
 </body>

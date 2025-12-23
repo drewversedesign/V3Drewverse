@@ -3,23 +3,26 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 
 /**
- * We use a let declaration here just in case the deployment environment 
- * tries to target const declarations for global variable injection.
+ * Root element selector with fallback error display
  */
-let rootElement = document.getElementById('root');
+const rootEl = document.getElementById('root');
 
-if (rootElement) {
+if (rootEl) {
   try {
-    ReactDOM.createRoot(rootElement).render(
+    const root = ReactDOM.createRoot(rootEl);
+    root.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>
     );
-  } catch (error) {
-    console.error("Critical error during React render:", error);
-    rootElement.innerHTML = `<div style="padding: 20px; color: white; background: red; font-family: sans-serif;">
-      <h1>Application Error</h1>
-      <p>The application failed to start. Please check the console for details.</p>
+  } catch (err) {
+    console.error("React Bootstrap Error:", err);
+    rootEl.innerHTML = `<div style="color: white; background: #121212; padding: 40px; font-family: sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+      <div>
+        <h1 style="color: #F97316;">Application Error</h1>
+        <p>Something went wrong while starting the site.</p>
+        <p style="font-size: 12px; opacity: 0.5;">${err instanceof Error ? err.message : 'Unknown Error'}</p>
+      </div>
     </div>`;
   }
 }
