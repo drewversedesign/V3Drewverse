@@ -1,16 +1,14 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './App.tsx';
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
+// Directly access the element and render to avoid intermediate const declarations
+// which can occasionally be mangled by platform-specific snippet injections.
+const el = document.getElementById('root');
+if (el) {
+  ReactDOM.createRoot(el).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 }
-
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);

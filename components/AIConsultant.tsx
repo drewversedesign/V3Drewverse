@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { getAIResponse } from '../services/geminiService';
-import { ChatMessage } from '../types';
+import { getAIResponse } from '../services/geminiService.ts';
+import { ChatMessage } from '../types.ts';
 
 const AIConsultant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +76,6 @@ const AIConsultant: React.FC = () => {
               </div>
             )}
 
-            {/* Message Templates - Only show when it's the start of convo */}
             {messages.length === 1 && !isLoading && (
                <div className="grid grid-cols-1 gap-2 mt-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
                   <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 ml-1">Suggested topics</p>

@@ -1,6 +1,5 @@
-
 import { GoogleGenAI } from "@google/genai";
-import { ChatMessage } from "../types";
+import { ChatMessage } from "../types.ts";
 
 const SYSTEM_INSTRUCTION = `You are the DrewVerse AI Project Consultant. 
 Your goal is to help potential clients define their project requirements.
@@ -14,7 +13,18 @@ Keep responses concise and helpful. Recommend they book a consultation for a pre
 
 export const getAIResponse = async (history: ChatMessage[]) => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    // Access the API key using dynamic property access. 
+    // This bypasses many simple string-replacement tools (like Netlify's snippet injection)
+    // that might transform "const x = process.env.API_KEY" into invalid syntax like "const x = ;"
+    const env = (window as any)['process']['env'];
+    const apiKey = env['API' + '_KEY'];
+    
+    if (!apiKey) {
+      console.warn("Gemini API Key missing.");
+      return "I'm currently in offline mode. Please contact the team directly at Plot 12, Kampala Road for a consultation!";
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     
     const contents = history.map(msg => ({
       role: msg.role === 'user' ? 'user' : 'model',
@@ -31,9 +41,9 @@ export const getAIResponse = async (history: ChatMessage[]) => {
       },
     });
 
-    return response.text;
+    return response.text || "I processed that, but don't have a specific answer. Could you clarify your project vision?";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "I'm having a bit of trouble connecting to my creative brain. Please try again or contact us directly via email!";
+    return "I'm having a bit of trouble connecting to my creative brain. Please try again or contact us directly via WhatsApp!";
   }
 };

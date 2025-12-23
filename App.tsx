@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import AIConsultant from './components/AIConsultant';
-import BlogPage from './components/BlogPage';
-import { Project, Service } from './types';
+import Navbar from './components/Navbar.tsx';
+import AIConsultant from './components/AIConsultant.tsx';
+import BlogPage from './components/BlogPage.tsx';
+import { Project, Service } from './types.ts';
 
 // --- Standalone Modal Components ---
 
@@ -185,14 +185,14 @@ const App: React.FC = () => {
     const ogUrl = document.querySelector('meta[property="og:url"]');
     
     if (currentPath === 'home') {
-      document.title = "Web Design & Branding Agency in Kampala | DrewVerse Design";
-      metaDesc?.setAttribute("content", "Top-rated web design agency in Kampala. We build high-performance websites, e-commerce stores, and mobile apps for Uganda and international clients. Affordable pricing.");
+      document.title = "Top Web Design & Branding Agency in Kampala | DrewVerse Design";
+      metaDesc?.setAttribute("content", "Expert web design, app development, e-commerce stores, and digital marketing agency in Kampala. We build bold digital products for Uganda and international markets. Get a quote from $120.");
       canonical?.setAttribute("href", "https://www.drewversedesign.online/");
       ogTitle?.setAttribute("content", "Web Design & Branding Agency in Kampala | DrewVerse Design");
       ogUrl?.setAttribute("content", "https://www.drewversedesign.online/");
     } else if (currentPath === 'blog') {
-      document.title = "Insights & Tech Trends Blog | DrewVerse Uganda";
-      metaDesc?.setAttribute("content", "Expert perspectives on web design, branding, and innovation in the East African tech landscape. Stay updated with DrewVerse Kampala.");
+      document.title = "Tech Insights & Web Design Trends Blog | DrewVerse Uganda";
+      metaDesc?.setAttribute("content", "Stay ahead with expert perspectives on web design trends, mobile app engineering, and SEO strategies specifically for the East African tech landscape.");
       canonical?.setAttribute("href", "https://www.drewversedesign.online/blog");
       ogTitle?.setAttribute("content", "Insights & Tech Trends Blog | DrewVerse Uganda");
       ogUrl?.setAttribute("content", "https://www.drewversedesign.online/blog");
@@ -368,15 +368,9 @@ const App: React.FC = () => {
   ];
 
   const getBudgetForService = (service: string) => {
-    // Low / Monthly / Design specific
     if (service.includes('Starter') || service.includes('Maintenance') || service.includes('SEO') || service.includes('Logo') || service.includes('Content') || service.includes('Support')) return 'Less than 1M UGX ($270)';
-    
-    // Mid
     if (service.includes('Business') || service.includes('Basic E-Commerce') || service.includes('Branding') || service.includes('UI/UX') || service.includes('Creative') || service.includes('Marketing') || service.includes('Consultancy') || service.includes('Motion')) return '1M - 3M UGX ($270 - $800)';
-    
-    // High
     if (service.includes('Corporate') || service.includes('Advanced') || service.includes('App') || service.includes('E-Commerce') || service.includes('Cloud') || service.includes('Web Design')) return '3M - 10M UGX ($800 - $2,700)';
-    
     return 'Select Budget Range';
   };
 
@@ -389,7 +383,6 @@ const App: React.FC = () => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -780,7 +773,6 @@ const App: React.FC = () => {
 
   const FAQSection = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
-
     return (
       <section className="py-24 bg-white dark:bg-background-dark border-t border-gray-100 dark:border-white/5" id="faq">
         <div className="container mx-auto px-6">
@@ -788,7 +780,6 @@ const App: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-bold display-font uppercase">F.A.Q</h2>
             <p className="text-gray-500 max-w-2xl mx-auto">Answers to common questions about our web design and development process.</p>
           </div>
-
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <div 
@@ -873,7 +864,6 @@ const App: React.FC = () => {
             <p className="text-gray-500 max-w-2xl mx-auto">Expert digital solutions for the East African market. From high-end web design in Kampala to mobile app development in Uganda.</p>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
               <div key={service.id} className="bg-gray-50 dark:bg-surface-dark p-10 rounded-[2rem] border border-transparent hover:border-primary/20 transition-all duration-500 group">
@@ -902,7 +892,6 @@ const App: React.FC = () => {
             </div>
             <p className="text-gray-500 text-sm max-w-xs mb-2">We help brands across <span className="text-primary font-bold">Kampala and East Africa</span> stand out.</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {projects.map((project) => (
               <div 
@@ -935,7 +924,6 @@ const App: React.FC = () => {
       </section>
 
       <PricingSection />
-
       <FAQSection />
 
       <section className="py-24 bg-black text-white" id="contact">
@@ -1077,30 +1065,6 @@ const App: React.FC = () => {
           </div>
         </div>
       </section>
-    </>
-  );
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar onNavigate={setCurrentPath} currentPath={currentPath} />
-      <main className="flex-grow animate-in fade-in duration-500">
-        {currentPath === 'home' ? <LandingPage /> : <BlogPage onBack={() => setCurrentPath('home')} />}
-      </main>
-      <Footer />
-      <ServiceModal 
-        service={selectedService} 
-        onClose={() => setSelectedService(null)} 
-        onBook={handleBookService} 
-      />
-      <ProjectModal 
-        project={selectedProject} 
-        onClose={() => setSelectedProject(null)} 
-        onStartProject={() => {
-            setSelectedProject(null);
-            setTimeout(() => scrollToSection('contact'), 300);
-        }}
-      />
-      <AIConsultant />
     </div>
   );
 };

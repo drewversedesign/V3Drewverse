@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { BlogPost, Author } from '../types';
+import { BlogPost, Author } from '../types.ts';
 
 const AUTHORS: Record<string, Author> = {
   andrew: {
