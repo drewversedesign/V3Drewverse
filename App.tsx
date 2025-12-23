@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.tsx';
-import WhatsAppChat from './components/WhatsAppChat.tsx';
 import BlogPage from './components/BlogPage.tsx';
 import { Project, Service } from './types.ts';
 
@@ -458,7 +456,7 @@ const App: React.FC = () => {
               We build digital products that define the future of business in East Africa. Bold, strategic, and relentlessly creative.
             </p>
             <div className="flex gap-4 pt-2">
-              {['twitter', 'linkedin', 'instagram', 'github'].map(social => (
+              {['linkedin', 'instagram'].map(social => (
                 <a key={social} href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 group">
                   <img src={`https://cdn.simpleicons.org/${social}/white`} className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" alt={social} />
                 </a>
@@ -759,7 +757,7 @@ const App: React.FC = () => {
                         </div>
                     </div>
                      <button onClick={() => handleBookService("Creative Services")} className="w-full mt-8 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-bold uppercase text-xs tracking-widest hover:opacity-80 transition-all">
-                        Talk to Us on WhatsApp
+                        Request a Custom Quote
                     </button>
                  </div>
             </div>
@@ -939,17 +937,6 @@ const App: React.FC = () => {
                        <p className="text-lg font-medium">Plot 12, Kampala Road, Uganda</p>
                     </div>
                  </div>
-                 <a 
-                   href="https://wa.me/256772653789" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   className="inline-flex items-center gap-3 text-primary font-bold uppercase tracking-widest text-xs hover:text-white transition-colors border border-primary/30 p-4 rounded-xl hover:bg-primary/10"
-                 >
-                   <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black">
-                     <span className="material-symbols-outlined text-sm">chat</span>
-                   </div>
-                   Chat directly on WhatsApp
-                 </a>
               </div>
             </div>
             <div className="bg-[#111] p-10 md:p-14 rounded-[3rem] border border-white/5 min-h-[400px] flex items-center justify-center">
@@ -1004,7 +991,7 @@ const App: React.FC = () => {
                       value={formState.phone}
                       onChange={handleInputChange}
                       className="w-full bg-white/5 border-none rounded-2xl p-4 text-sm focus:ring-1 focus:ring-primary transition-all placeholder:text-gray-600" 
-                      placeholder="WhatsApp Number" 
+                      placeholder="Phone Number" 
                       type="tel" 
                       aria-label="Phone Number" 
                     />
@@ -1070,7 +1057,6 @@ const App: React.FC = () => {
     <div className="relative">
       <Navbar currentPath={currentPath} onNavigate={setCurrentPath} />
       {currentPath === 'home' ? <LandingPage /> : <BlogPage onBack={() => setCurrentPath('home')} />}
-      <WhatsAppChat />
       <Footer />
       <ServiceModal 
         service={selectedService} 
