@@ -649,16 +649,24 @@ const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath, newsletter
                      Subscribed successfully!
                  </div>
              ) : (
-                <form className="flex flex-col gap-3" onSubmit={handleNewsletterSubmit}>
+                <form 
+                    name="newsletter"
+                    method="POST"
+                    data-netlify="true"
+                    className="flex flex-col gap-3" 
+                    onSubmit={handleNewsletterSubmit}
+                >
+                    <input type="hidden" name="form-name" value="newsletter" />
                     <input 
                         type="email" 
+                        name="email"
                         required
                         value={newsletterEmail}
                         onChange={(e) => setNewsletterEmail(e.target.value)}
                         placeholder="Email address" 
                         className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-gray-600" 
                     />
-                    <button className="bg-white text-black font-bold uppercase tracking-widest text-xs py-3 rounded-xl hover:bg-primary hover:text-white transition-colors">
+                    <button type="submit" className="bg-white text-black font-bold uppercase tracking-widest text-xs py-3 rounded-xl hover:bg-primary hover:text-white transition-colors">
                         Subscribe
                     </button>
                 </form>
@@ -1065,9 +1073,20 @@ const App: React.FC = () => {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if(newsletterEmail) {
-        setNewsletterStatus('success');
-        setNewsletterEmail('');
-        setTimeout(() => setNewsletterStatus('idle'), 5000);
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "newsletter", email: newsletterEmail })
+        })
+        .then(() => {
+            setNewsletterStatus('success');
+            setNewsletterEmail('');
+            setTimeout(() => setNewsletterStatus('idle'), 5000);
+        })
+        .catch(error => {
+            alert("Subscription failed. Please try again.");
+            console.error(error);
+        });
     }
   };
 
