@@ -108,17 +108,20 @@
     <script type="module" src="index.tsx"></script>
 
     <!-- Netlify Forms Support -->
-    <form name="contact" netlify hidden>
+    <!-- Added method="POST" and data-netlify="true" for better compatibility -->
+    <form name="contact" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="subject" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
-      <!-- Changed selects to inputs to allow dynamic values without strict validation by Netlify build -->
       <input type="text" name="budget" />
       <input type="text" name="service" />
       <textarea name="message"></textarea>
     </form>
     
-    <form name="newsletter" netlify hidden>
+    <form name="newsletter" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="newsletter" />
       <input type="email" name="email" />
     </form>
 </body>

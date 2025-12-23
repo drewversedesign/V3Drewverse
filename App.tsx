@@ -1054,10 +1054,17 @@ const App: React.FC = () => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    // Inject a subject line based on the user's name to prevent spam filtering
+    const formData = {
+        "form-name": "contact",
+        "subject": `New Project Inquiry from ${formState.name}`,
+        ...formState
+    };
+    
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...formState })
+      body: encode(formData)
     })
     .then(() => {
       setIsSubmitted(true);
