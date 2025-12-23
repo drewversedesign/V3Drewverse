@@ -108,16 +108,17 @@
     <script type="module" src="index.tsx"></script>
 
     <!-- Netlify Forms Support -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <form name="contact" netlify hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
-      <select name="budget"></select>
-      <select name="service"></select>
+      <!-- Changed selects to inputs to allow dynamic values without strict validation by Netlify build -->
+      <input type="text" name="budget" />
+      <input type="text" name="service" />
       <textarea name="message"></textarea>
     </form>
     
-    <form name="newsletter" netlify netlify-honeypot="bot-field" hidden>
+    <form name="newsletter" netlify hidden>
       <input type="email" name="email" />
     </form>
 </body>
