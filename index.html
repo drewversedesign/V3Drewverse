@@ -22,8 +22,9 @@
 </script>
 
     <script>
-        // Global shim for process.env to prevent crashes in browser environment
-        window.process = { env: { API_KEY: '' } };
+        // Use bracket notation to prevent build tools from trying to inject into this literal structure
+        window['process'] = { 'env': {} };
+        window['process']['env']['API' + '_KEY'] = '';
     </script>
 
     <!-- Open Graph / Facebook -->

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.tsx';
-import AIConsultant from './components/AIConsultant.tsx';
+import WhatsAppChat from './components/WhatsAppChat.tsx';
 import BlogPage from './components/BlogPage.tsx';
 import { Project, Service } from './types.ts';
 
@@ -152,9 +152,7 @@ const App: React.FC = () => {
     if (storedCurrency === 'UGX' || storedCurrency === 'USD') {
       setCurrency(storedCurrency);
     } else {
-      // Default fallback
       setCurrency('USD');
-      // Attempt geolocation
       fetch('https://ipapi.co/json/')
         .then(res => res.json())
         .then(data => {
@@ -1065,6 +1063,28 @@ const App: React.FC = () => {
           </div>
         </div>
       </section>
+    </>
+  );
+
+  return (
+    <div className="relative">
+      <Navbar currentPath={currentPath} onNavigate={setCurrentPath} />
+      {currentPath === 'home' ? <LandingPage /> : <BlogPage onBack={() => setCurrentPath('home')} />}
+      <WhatsAppChat />
+      <Footer />
+      <ServiceModal 
+        service={selectedService} 
+        onClose={() => setSelectedService(null)} 
+        onBook={handleBookService} 
+      />
+      <ProjectModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+        onStartProject={() => {
+            setSelectedProject(null);
+            setTimeout(() => scrollToSection('contact'), 100);
+        }} 
+      />
     </div>
   );
 };
