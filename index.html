@@ -8,6 +8,11 @@
     <meta name="keywords" content="web design Kampala, digital agency Uganda, website developers in Kampala, branding agency East Africa, UI UX design Uganda, e-commerce developers Uganda, mobile app development Kampala, SEO services Uganda, digital marketing agency Kampala, cloud hosting Uganda, tech consultancy East Africa, DrewVerse Design">
     <link rel="canonical" href="https://www.drewversedesign.online/" />
     
+    <script>
+        // Initialize process shim immediately at the top of head
+        window.process = { env: { API_KEY: '' } };
+    </script>
+
     <script type="importmap">
 {
   "imports": {
@@ -15,17 +20,10 @@
     "react/": "https://esm.sh/react@19.0.0/",
     "react-dom": "https://esm.sh/react-dom@19.0.0",
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "@google/genai": "https://esm.sh/@google/genai@1.3.0",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
-
-    <script>
-        // Use bracket notation to prevent build tools from trying to inject into this literal structure
-        window['process'] = { 'env': {} };
-        window['process']['env']['API' + '_KEY'] = '';
-    </script>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -74,6 +72,13 @@
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
+        }
+        #root:empty {
+            display: flex;
+            align-items: center;
+            justify-center: center;
+            height: 100vh;
+            background: #0A0A0A;
         }
     </style>
 </head>

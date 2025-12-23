@@ -1,8 +1,5 @@
 {
   "name": "DrewVerse Design - Creative Agency",
-  "description": "A high-performance digital agency portfolio featuring modern design, interactive services, and a Gemini-powered project consultant.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "description": "A high-performance digital agency portfolio featuring modern design, interactive services, and direct WhatsApp connectivity.",
+  "requestFramePermissions": []
 }
