@@ -175,24 +175,24 @@ const SERVICES: Service[] = [
 
 const FAQS = [
   {
-    question: "Why do website prices vary so much?",
-    answer: "Every project is unique. The complexity of features (like e-commerce, user logins, animations), the number of pages, and the level of design customization all affect the time and expertise required, which determines the final investment."
+    question: "How long does a typical project take?",
+    answer: "Timelines depend on complexity. A standard business website typically takes 2–3 weeks, while complex e-commerce or web apps can take 6–10 weeks. We provide a detailed timeline before starting."
   },
   {
-    question: "What are your payment terms?",
-    answer: "We work with a standard 50% deposit to kickstart the project. The remaining 50% is due only upon completion and your final approval of the work."
+    question: "Do I own the code and design?",
+    answer: "Absolutely. Once the final payment is made, you have 100% ownership of your website, domain, and all design assets. We don't believe in holding your digital property hostage."
   },
   {
-    question: "Are hosting and domain included?",
-    answer: "Hosting and domain fees are typically purchased directly by the client so you retain full ownership of your assets. We guide you through this simple process or can manage it on your behalf for a setup fee."
+    question: "Will my website be visible on Google?",
+    answer: "Yes. All our websites are built with SEO best practices in mind (fast loading, mobile-optimized, proper meta tags). We also offer dedicated SEO packages to help you rank for competitive keywords in Kampala and beyond."
   },
   {
-    question: "How many revisions do I get?",
-    answer: "Our packages typically include 2-3 rounds of major revisions during the design phase. This ensures we hit the mark visually before development begins, keeping the project on timeline."
+    question: "Can I update the content myself?",
+    answer: "Yes! We build on user-friendly Content Management Systems (like WordPress or Sanity). We provide a training session and a guide so you can easily edit text, images, and blog posts without needing a developer."
   },
   {
-    question: "Do you offer post-launch support?",
-    answer: "Yes, we provide 1 month of complimentary support to fix any bugs or glitches. After that, we offer affordable monthly maintenance packages to keep your site secure and updated."
+    question: "What payment methods do you accept?",
+    answer: "We accept bank transfers, mobile money (MTN/Airtel), and international payments via Stripe or Wise. We typically require a 50% deposit to begin, with the balance due upon successful launch."
   }
 ];
 
@@ -599,11 +599,15 @@ const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath }) => (
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
           <div className="md:col-span-5 space-y-6">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentPath('home')}>
+            <a 
+              href="/"
+              className="flex items-center gap-2 cursor-pointer" 
+              onClick={(e) => { e.preventDefault(); setCurrentPath('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            >
                <span className="text-2xl font-bold tracking-tighter uppercase display-font">
                 DrewVerse<br/><span className="text-primary text-xs tracking-widest">Design</span>
               </span>
-            </div>
+            </a>
             <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
               We build digital products that define the future of business in East Africa. Bold, strategic, and relentlessly creative.
             </p>
@@ -619,9 +623,33 @@ const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath }) => (
           <div className="md:col-span-3 md:col-start-7">
             <h4 className="font-bold uppercase tracking-widest text-xs mb-8 text-white/40">Company</h4>
             <ul className="space-y-4 text-sm font-medium text-gray-400">
-              <li><button onClick={() => setCurrentPath('home')} className="hover:text-primary transition-colors text-left">Home</button></li>
-              <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('hero'), 100)}} className="hover:text-primary transition-colors text-left">About</button></li>
-              <li><button onClick={() => setCurrentPath('blog')} className="hover:text-primary transition-colors text-left">Blog</button></li>
+              <li>
+                  <a 
+                    href="/"
+                    onClick={(e) => { e.preventDefault(); setCurrentPath('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    Home
+                  </a>
+              </li>
+              <li>
+                  <a 
+                    href="/#hero"
+                    onClick={(e) => { e.preventDefault(); setCurrentPath('home'); setTimeout(() => scrollToSection('hero'), 100)}} 
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    About
+                  </a>
+              </li>
+              <li>
+                  <a 
+                    href="/blog"
+                    onClick={(e) => { e.preventDefault(); setCurrentPath('blog'); }}
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    Blog
+                  </a>
+              </li>
               <li><a href="#" className="hover:text-primary transition-colors block">Careers</a></li>
             </ul>
           </div>
@@ -629,10 +657,42 @@ const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath }) => (
           <div className="md:col-span-3">
             <h4 className="font-bold uppercase tracking-widest text-xs mb-8 text-white/40">Services</h4>
             <ul className="space-y-4 text-sm font-medium text-gray-400">
-              <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} className="hover:text-primary transition-colors text-left">Web Design</button></li>
-              <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} className="hover:text-primary transition-colors text-left">App Development</button></li>
-              <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} className="hover:text-primary transition-colors text-left">Branding</button></li>
-              <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} className="hover:text-primary transition-colors text-left">SEO</button></li>
+              <li>
+                  <a 
+                    href="/#services"
+                    onClick={(e) => { e.preventDefault(); setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} 
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    Web Design
+                  </a>
+              </li>
+              <li>
+                  <a 
+                    href="/#services"
+                    onClick={(e) => { e.preventDefault(); setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} 
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    App Development
+                  </a>
+              </li>
+              <li>
+                  <a 
+                    href="/#services"
+                    onClick={(e) => { e.preventDefault(); setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} 
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    Branding
+                  </a>
+              </li>
+              <li>
+                  <a 
+                    href="/#services"
+                    onClick={(e) => { e.preventDefault(); setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} 
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    SEO
+                  </a>
+              </li>
             </ul>
           </div>
         </div>
