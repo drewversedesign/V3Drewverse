@@ -592,17 +592,13 @@ const FAQSection: React.FC = () => {
 interface FooterProps {
     currentPath: string;
     setCurrentPath: (path: string) => void;
-    newsletterStatus: 'idle' | 'success';
-    newsletterEmail: string;
-    setNewsletterEmail: (email: string) => void;
-    handleNewsletterSubmit: (e: React.FormEvent) => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath, newsletterStatus, newsletterEmail, setNewsletterEmail, handleNewsletterSubmit }) => (
+const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath }) => (
     <footer className="bg-black text-white border-t border-white/10 pt-24 pb-12">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
-          <div className="md:col-span-4 space-y-6">
+          <div className="md:col-span-5 space-y-6">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentPath('home')}>
                <span className="text-2xl font-bold tracking-tighter uppercase display-font">
                 DrewVerse<br/><span className="text-primary text-xs tracking-widest">Design</span>
@@ -620,7 +616,7 @@ const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath, newsletter
             </div>
           </div>
           
-          <div className="md:col-span-2 md:col-start-6">
+          <div className="md:col-span-3 md:col-start-7">
             <h4 className="font-bold uppercase tracking-widest text-xs mb-8 text-white/40">Company</h4>
             <ul className="space-y-4 text-sm font-medium text-gray-400">
               <li><button onClick={() => setCurrentPath('home')} className="hover:text-primary transition-colors text-left">Home</button></li>
@@ -630,7 +626,7 @@ const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath, newsletter
             </ul>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <h4 className="font-bold uppercase tracking-widest text-xs mb-8 text-white/40">Services</h4>
             <ul className="space-y-4 text-sm font-medium text-gray-400">
               <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} className="hover:text-primary transition-colors text-left">Web Design</button></li>
@@ -638,39 +634,6 @@ const Footer: React.FC<FooterProps> = ({ currentPath, setCurrentPath, newsletter
               <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} className="hover:text-primary transition-colors text-left">Branding</button></li>
               <li><button onClick={() => { setCurrentPath('home'); setTimeout(() => scrollToSection('services'), 100)}} className="hover:text-primary transition-colors text-left">SEO</button></li>
             </ul>
-          </div>
-
-          <div className="md:col-span-3">
-             <h4 className="font-bold uppercase tracking-widest text-xs mb-8 text-white/40">Newsletter</h4>
-             <p className="text-gray-500 text-sm mb-6">Join 2,000+ subscribers for the latest Uganda tech trends.</p>
-             {newsletterStatus === 'success' ? (
-                 <div className="bg-green-500/10 border border-green-500/20 text-green-500 p-4 rounded-xl text-sm font-bold flex items-center gap-2 animate-in fade-in">
-                     <span className="material-symbols-outlined text-lg">check_circle</span>
-                     Subscribed successfully!
-                 </div>
-             ) : (
-                <form 
-                    name="newsletter"
-                    method="POST"
-                    data-netlify="true"
-                    className="flex flex-col gap-3" 
-                    onSubmit={handleNewsletterSubmit}
-                >
-                    <input type="hidden" name="form-name" value="newsletter" />
-                    <input 
-                        type="email" 
-                        name="email"
-                        required
-                        value={newsletterEmail}
-                        onChange={(e) => setNewsletterEmail(e.target.value)}
-                        placeholder="Email address" 
-                        className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-gray-600" 
-                    />
-                    <button type="submit" className="bg-white text-black font-bold uppercase tracking-widest text-xs py-3 rounded-xl hover:bg-primary hover:text-white transition-colors">
-                        Subscribe
-                    </button>
-                </form>
-             )}
           </div>
         </div>
 
@@ -877,6 +840,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
                   className="space-y-6 w-full"
                 >
                   <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="bot-field" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <input 
                       name="name"
@@ -980,8 +944,7 @@ const App: React.FC = () => {
     budget: 'Select Budget Range',
     message: ''
   });
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle');
+  // Removed Newsletter state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -1053,11 +1016,18 @@ const App: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (formState.service === 'Select Service' || formState.budget === 'Select Budget Range') {
+        alert("Please select a valid service and budget range.");
+        return;
+    }
+
     setIsSubmitting(true);
     // Inject a subject line based on the user's name to prevent spam filtering
     const formData = {
         "form-name": "contact",
-        "subject": `New Project Inquiry from ${formState.name}`,
+        "bot-field": "",
+        "subject": `New Project Inquiry from ${formState.name} - ${formState.service}`,
         ...formState
     };
     
@@ -1077,25 +1047,7 @@ const App: React.FC = () => {
     });
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if(newsletterEmail) {
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "newsletter", email: newsletterEmail })
-        })
-        .then(() => {
-            setNewsletterStatus('success');
-            setNewsletterEmail('');
-            setTimeout(() => setNewsletterStatus('idle'), 5000);
-        })
-        .catch(error => {
-            alert("Subscription failed. Please try again.");
-            console.error(error);
-        });
-    }
-  };
+  // Removed handleNewsletterSubmit
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -1156,10 +1108,6 @@ const App: React.FC = () => {
       <Footer 
           currentPath={currentPath}
           setCurrentPath={setCurrentPath}
-          newsletterStatus={newsletterStatus}
-          newsletterEmail={newsletterEmail}
-          setNewsletterEmail={setNewsletterEmail}
-          handleNewsletterSubmit={handleNewsletterSubmit}
       />
 
       <ServiceModal 
