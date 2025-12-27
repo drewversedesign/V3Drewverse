@@ -934,7 +934,36 @@ const LandingPage: React.FC<LandingPageProps> = ({
 // --- Main App Component ---
 
 const App: React.FC = () => {
-  const [currentPath, setCurrentPath] = useState('home');
+  // Initialize state based on current URL to handle direct links/refreshes
+  const [currentPath, setCurrentPathState] = useState(() => {
+    if (typeof window !== 'undefined') {
+       return window.location.pathname.includes('/blog') ? 'blog' : 'home';
+    }
+    return 'home';
+  });
+  
+  // Custom setter to update URL history
+  const setCurrentPath = (path: string) => {
+    setCurrentPathState(path);
+    if (typeof window !== 'undefined') {
+      const newUrl = path === 'home' ? '/' : `/${path}`;
+      if (window.location.pathname !== newUrl) {
+        window.history.pushState({}, '', newUrl);
+      }
+    }
+  };
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+       const path = window.location.pathname.includes('/blog') ? 'blog' : 'home';
+       setCurrentPathState(path);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const [currency, setCurrency] = useState<'UGX' | 'USD'>('USD');
   const [formState, setFormState] = useState({
     name: '',
