@@ -10,7 +10,7 @@ const PROJECTS: Project[] = [
     id: 1, 
     title: 'Tattoo Studio', 
     description: 'Interactive portfolio & booking platform for modern artists in Kampala.', 
-    image: 'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=800&fm=webp&auto=format&fit=crop', 
+    image: 'https://github.com/drewversedesign/images-for-drewverse-website/blob/main/%20sample%20website%20designs%20by%20Drewverse%20Design.%20drewversedesign.online%20%20(7).png?raw=true', 
     category: 'Web',
     client: 'InkMasters Kampala',
     timeline: '4 Weeks',
@@ -21,7 +21,7 @@ const PROJECTS: Project[] = [
     id: 2, 
     title: 'Portfolio Website', 
     description: 'Advanced animations & creative showcase for high-end East African talent.', 
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&fm=webp&auto=format&fit=crop', 
+    image: 'https://github.com/drewversedesign/images-for-drewverse-website/blob/main/%20sample%20website%20designs%20by%20Drewverse%20Design.%20drewversedesign.online%20%20(9).png?raw=true', 
     category: 'UI/UX',
     client: 'Sarah Creative',
     timeline: '2 Weeks',
@@ -32,7 +32,7 @@ const PROJECTS: Project[] = [
     id: 3, 
     title: 'Furniture Store', 
     description: 'Minimalist e-commerce with unique visualization for premium local brands.', 
-    image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=800&fm=webp&auto=format&fit=crop', 
+    image: 'https://github.com/drewversedesign/images-for-drewverse-website/blob/main/%20sample%20website%20designs%20by%20Drewverse%20Design.%20drewversedesign.online%20%20(10).png?raw=true', 
     category: 'E-commerce',
     client: 'WoodWorks Uganda',
     timeline: '8 Weeks',
@@ -43,7 +43,7 @@ const PROJECTS: Project[] = [
     id: 4, 
     title: 'Foundation Website', 
     description: 'Donation campaigns & community engagement for Ugandan NGOs.', 
-    image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=800&fm=webp&auto=format&fit=crop', 
+    image: 'https://github.com/drewversedesign/images-for-drewverse-website/blob/main/%20sample%20website%20designs%20by%20Drewverse%20Design.%20drewversedesign.online%20%20(8).png?raw=true', 
     category: 'NGO',
     client: 'Hope Future',
     timeline: '3 Weeks',
@@ -54,7 +54,7 @@ const PROJECTS: Project[] = [
     id: 5, 
     title: 'Tech Blog Platform', 
     description: 'Modern publishing platform for the growing tech community in East Africa.', 
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=800&fm=webp&auto=format&fit=crop', 
+    image: 'https://github.com/drewversedesign/images-for-drewverse-website/blob/main/photo_5794068069973345986_y.jpg?raw=true', 
     category: 'Product',
     client: 'TechInside',
     timeline: '6 Weeks',
@@ -65,7 +65,7 @@ const PROJECTS: Project[] = [
     id: 6, 
     title: 'Corporate Portal', 
     description: 'Professional identity & user portal for scalable enterprises in Uganda.', 
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&fm=webp&auto=format&fit=crop', 
+    image: 'https://github.com/drewversedesign/images-for-drewverse-website/blob/main/photo_5794068069973345987_y.jpg?raw=true', 
     category: 'Corporate',
     client: 'Apex Group',
     timeline: '10 Weeks',
@@ -777,7 +777,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
                   width="800"
                   height="1000"
                   className="w-full aspect-[4/5] object-cover" 
-                  src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&fm=webp&auto=format&fit=crop"
+                  src="https://github.com/drewversedesign/images-for-drewverse-website/blob/main/%20sample%20website%20designs%20by%20Drewverse%20Design.%20drewversedesign.online%20%20(6).png?raw=true"
                   loading="eager"
                 />
               </div>
